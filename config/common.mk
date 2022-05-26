@@ -66,6 +66,10 @@ PRODUCT_PRODUCT_PROPERTIES += \
 PRODUCT_SYSTEM_PROPERTIES += \
     persist.device_config.runtime_native_boot.iorap_perfetto_enable=true
 
+# Disable async MTE on system_server
+PRODUCT_SYSTEM_EXT_PROPERTIES += \
+    arm64.memtag.process.system_server=off
+
 # Proton Clang
 ifeq ($(USE_PROTON),true)
 KERNEL_SUPPORTS_LLVM_TOOLS := true
@@ -119,10 +123,6 @@ include vendor/corvus/config/branding.mk
 # Packages
 include vendor/corvus/config/packages.mk
 
-# TouchGestures
-PRODUCT_PACKAGES += \
-    TouchGestures
-
 # Themes
 #include vendor/themes/common.mk
 
@@ -157,4 +157,4 @@ PRODUCT_PRODUCT_PROPERTIES += \
 
 # Enable gestural navigation overlay to match default navigation mode
 PRODUCT_PRODUCT_PROPERTIES += \
-    ro.boot.vendor.overlay.theme=com.android.internal.systemui.navbar.gestural;com.google.android.systemui.gxoverlay
+    ro.boot.vendor.overlay.theme=com.android.internal.systemui.navbar.gestural
